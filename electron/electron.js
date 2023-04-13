@@ -1,7 +1,9 @@
 const electron = require("electron");
-const {screen} = require("electron");
+const { screen } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
+
+const {setMainMenu} = require("./mainMenu.js");
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -9,9 +11,10 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
 function createWindow() {
-    const {width, height} = screen.getPrimaryDisplay().workAreaSize; 
+  setMainMenu()
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
-  mainWindow = new BrowserWindow({ width, height});
+  mainWindow = new BrowserWindow({ width, height });
   mainWindow.loadURL(
     isDev
       ? "http://localhost:5173"
