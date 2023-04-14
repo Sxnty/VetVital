@@ -13,58 +13,64 @@ import {
 } from "react-icons/md";
 import { CiMedicalCross } from "react-icons/ci";
 import "../../styles/components-styles/navbar.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
+  const { pathname } = useLocation();
+
+  const getActiveClass = (pathname, activePath) => {
+    return pathname === activePath ? "active" : null;
+  };
+
   return (
     <aside className="navbar">
       <ul className="navbar__menu">
         <div className="menu__items">
           <Link to="/">
-            <li className="active">
+            <li className={getActiveClass(pathname, "/")}>
               <AiOutlineHome />
               Inicio
             </li>
           </Link>
           <Link to="/schedule">
-            <li>
+            <li className={getActiveClass(pathname, "/schedule")}>
               <AiOutlineSchedule />
               Agenda
             </li>
           </Link>
           <Link to="/patients">
-            <li>
+            <li className={getActiveClass(pathname, "/patients")}>
               <MdOutlinePets />
               Pacientes
             </li>
           </Link>
           <Link to="/team">
-            <li>
+            <li className={getActiveClass(pathname, "/team")}>
               <AiOutlineTeam />
               Equipo
             </li>
           </Link>
           <Link to="/operation">
-            <li>
+            <li className={getActiveClass(pathname, "/operation")}>
               <CiMedicalCross />
               Operacion
             </li>
           </Link>
           <Link to="/inventory">
-            <li>
+            <li className={getActiveClass(pathname, "/inventory")}>
               <MdOutlineInventory2 />
               Inventario
             </li>
           </Link>
           <Link to="/">
-            <li>
+            <li className={getActiveClass(pathname, "/error")}>
               <MdOutlineSos />
               Emergencia
             </li>
           </Link>
 
           <Link to="/billing">
-            <li>
+            <li className={getActiveClass(pathname, "/billing")}>
               <MdOutlinePayment />
               Cobranza
             </li>
