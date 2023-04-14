@@ -1,0 +1,75 @@
+.main__stadistics {
+  margin: 1rem;
+  display: grid;
+  width: 80%;
+  height: 50%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border-radius: 1rem;
+  gap: 1rem;
+  .stadistics__box1 {
+    background: linear-gradient(
+      306deg,
+      rgba(241, 212, 212, 1) 33%,
+      rgba(230, 115, 159, 1) 100%
+    );
+  }
+  .stadistics__box2 {
+    background: linear-gradient(
+      27deg,
+      rgba(241, 212, 212, 1) 33%,
+      rgba(230, 115, 159, 1) 100%
+    );
+  }
+  .stadistics__box3 {
+    background: linear-gradient(
+      228deg,
+      rgba(241, 212, 212, 1) 33%,
+      rgba(230, 115, 159, 1) 100%
+    );
+  }
+  .stadistics__box4 {
+    background: linear-gradient(
+      135deg,
+      rgba(241, 212, 212, 1) 33%,
+      rgba(230, 115, 159, 1) 100%
+    );
+  }
+  > div {
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 100%;
+    margin: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    .stadistics__top {
+      display: flex;
+      flex-direction: row;
+      font-size: 3rem;
+      gap: 0.5rem;
+      color: #790c5a;
+      h2 {
+        font-size: 2.5rem;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        font-family: "Poppins", sans-serif;
+      }
+    }
+    .stadistics__info {
+      margin: 0.5rem;
+      font-family: "Poppins", sans-serif;
+      color: #790c5aa2;
+      font-weight: bold;
+      font-size: 1rem;
+      .p__month{
+        display: flex;
+        justify-content: center;
+        font-size: .7rem;
+      }
+    }
+  }
+}
