@@ -13,44 +13,62 @@ import {
 } from "react-icons/md";
 import { CiMedicalCross } from "react-icons/ci";
 import "../../styles/components-styles/navbar.scss";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <aside className="navbar">
       <ul className="navbar__menu">
         <div className="menu__items">
-          <li className="active">
-            <AiOutlineHome />
-            Inicio
-          </li>
-          <li>
-            <AiOutlineSchedule />
-            Agenda
-          </li>
-          <li>
-            <MdOutlinePets />
-            Pacientes
-          </li>
-          <li>
-            <AiOutlineTeam />
-            Equipo
-          </li>
-          <li>
-            <CiMedicalCross />
-            Operacion
-          </li>
-          <li>
-            <MdOutlineInventory2 />
-            Inventario
-          </li>
-          <li>
-            <MdOutlineSos />
-            Emergencia
-          </li>
-          <li>
-            <MdOutlinePayment />
-            Cobranza
-          </li>
+          <Link to="/">
+            <li className="active">
+              <AiOutlineHome />
+              Inicio
+            </li>
+          </Link>
+          <Link to="/schedule">
+            <li>
+              <AiOutlineSchedule />
+              Agenda
+            </li>
+          </Link>
+          <Link to="/patients">
+            <li>
+              <MdOutlinePets />
+              Pacientes
+            </li>
+          </Link>
+          <Link to="/team">
+            <li>
+              <AiOutlineTeam />
+              Equipo
+            </li>
+          </Link>
+          <Link to="/operation">
+            <li>
+              <CiMedicalCross />
+              Operacion
+            </li>
+          </Link>
+          <Link to="/inventory">
+            <li>
+              <MdOutlineInventory2 />
+              Inventario
+            </li>
+          </Link>
+          <Link to="/">
+            <li>
+              <MdOutlineSos />
+              Emergencia
+            </li>
+          </Link>
+
+          <Link to="/billing">
+            <li>
+              <MdOutlinePayment />
+              Cobranza
+            </li>
+          </Link>
         </div>
         <li className="menu__logout">
           <MdLogout />
