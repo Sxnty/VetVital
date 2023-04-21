@@ -29,43 +29,77 @@ export const getPatients = async () => {
 };
 
 export const getOnePatient = async (id) => {
-  const patientsRef = collection(db, "patients");
-  const patientDoc = doc(patientsRef, id);
-  const docSnapshot = await getDoc(patientDoc);
-
-  if (docSnapshot.exists()) {
-    const data = docSnapshot.data();
-    console.log(data);
-    return { code: 200, msg: data };
-  } else {
-    return { code: 500, msg: `No se encontró el paciente con ID ${id}` };
+  try {
+    const patientsRef = collection(db, "patients");
+    const patientDoc = doc(patientsRef, id);
+    const docSnapshot = await getDoc(patientDoc);
+    if (!docSnapshot.exists()) {
+      throw new Error(`No se encontro el paciente con el id ${id}`);
+    } else {
+      const data = docSnapshot.data();
+      console.log(data);
+      return { code: 200, msg: data };
+    }
+  } catch (error) {
+    console.error(error);
+    return { code: 404, msg: `Error buscado al paciente: ${error}` };
   }
 };
 
-export const addPatient = async (patient) => {
-  if (patient) {
-    let result = await addDoc(collection(db, "patients"), patient);
-    if (result && result.type === "document") {
-      return { code: 200, id: result.id };
-    } else {
-      return { code: 500, msg: "Error al añadir paciente" };
-    }
+const validatePatient = (patient) => {
+  const { name, age, history, owner, animal } = patient;
+  if (!name || !age || !history || !owner || !animal) {
+    throw new Error(
+      "Debe proporcionar todos los datos para añadir al paciente"
+    );
+  }
+};
+
+export const addPatient = async ({ name, age, history, owner, animal }) => {
+  try {
+    const patient = { name, age, history, owner, animal };
+    validatePatient(patient);
+
+    let patientRef = collection(db, "patients");
+    await addDoc(patientRef, patient);
+    return { code: 200, msg: "Paciente añadido correctamente" };
+  } catch (error) {
+    console.error(error);
+    return { code: 500, msg: `Error añadiendo al paciente: ${error}` };
   }
 };
 
 export const deletePatient = async (id) => {
-  let patientRef = collection(db, "patients");
-  await deleteDoc(doc(patientRef, id));
-  return { code: 200, msg: "Paciente eliminada correctamente" };
+  try {
+    const patientRef = doc(collection(db, "patients"), id);
+    let patientDoc = await getDoc(patientRef);
+    if (!patientDoc.exists()) {
+      throw new Error("No existe el paciente con el id proporcionado");
+    }
+    await deleteDoc(patientRef);
+    return { code: 200, msg: "Paciente eliminada correctamente" };
+  } catch (error) {
+    console.error(error);
+    return { code: 500, msg: `Error eliminando al paciente: ${error}` };
+  }
 };
 
 export const getPatientByName = async (name) => {
   const patientsRef = collection(db, "patients");
   const q = query(patientsRef, where("name", "==", name));
-  const querySnapshot = await getDocs(q);
-  if (!querySnapshot.empty) {
-    console.log(querySnapshot.docs[0].data());
-  } else {
-    return null;
+  try {
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.docs.length > 0) {
+      let data = querySnapshot.docs[0].data();
+      return { code: 200, data };
+    } else {
+      return {
+        code: 500,
+        msg: "No se encontro ningun documento con esos parametros",
+      };
+    }
+  } catch (error) {
+    console.error(error);
+    return { code: 500, msg: "Ha ocurrido un error no especificado" };
   }
 };
