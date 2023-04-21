@@ -7,11 +7,11 @@ import {
   getDoc,
   addDoc,
   deleteDoc,
-} from "firebase/firestore/lite";
+} from "firebase/firestore";
 import { db } from "./firebase";
 
 export const getPatients = async () => {
-  let patientsRef = collection(db, "pacientes");
+  let patientsRef = collection(db, "patients");
   const querySnapshot = await getDocs(patientsRef);
   if (querySnapshot && querySnapshot.docs) {
     const result = querySnapshot.docs.map((doc) => {
@@ -29,7 +29,7 @@ export const getPatients = async () => {
 };
 
 export const getOnePatient = async (id) => {
-  const patientsRef = collection(db, "pacientes");
+  const patientsRef = collection(db, "patients");
   const patientDoc = doc(patientsRef, id);
   const docSnapshot = await getDoc(patientDoc);
 
@@ -44,7 +44,7 @@ export const getOnePatient = async (id) => {
 
 export const addPatient = async (patient) => {
   if (patient) {
-    let result = await addDoc(collection(db, "pacientes"), patient);
+    let result = await addDoc(collection(db, "patients"), patient);
     if (result && result.type === "document") {
       return { code: 200, id: result.id };
     } else {
@@ -54,7 +54,18 @@ export const addPatient = async (patient) => {
 };
 
 export const deletePatient = async (id) => {
-  let patientRef = collection(db, "pacientes");
+  let patientRef = collection(db, "patients");
   await deleteDoc(doc(patientRef, id));
   return { code: 200, msg: "Paciente eliminada correctamente" };
+};
+
+export const getPatientByName = async (name) => {
+  const patientsRef = collection(db, "patients");
+  const q = query(patientsRef, where("name", "==", name));
+  const querySnapshot = await getDocs(q);
+  if (!querySnapshot.empty) {
+    console.log(querySnapshot.docs[0].data());
+  } else {
+    return null;
+  }
 };
