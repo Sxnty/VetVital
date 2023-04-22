@@ -1,0 +1,45 @@
+.patient__card {
+    cursor: pointer;
+  background-image: linear-gradient(to bottom, #f1d4d4, #e6739f);
+  width: 90%;
+  margin: auto;
+  height: 300px;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 2rem;
+  transition: filter 150ms, transform 150ms,  box-shadow 150ms;
+  svg {
+    font-size: 5rem;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50%;
+    padding-block: 1rem;
+  }
+  .card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    h1 {
+      color: #790c5a;
+      font-size: 1.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      border-bottom: 1px solid #790c5a;
+      padding-bottom: 0.2rem;
+    }
+    h2 {
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-weight: lighter;
+    }
+  }
+  &:hover {
+    filter: saturate(150%);
+    transform: scale(102%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+}

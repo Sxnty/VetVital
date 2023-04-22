@@ -1,0 +1,66 @@
+.hero__patients {
+  padding-top: 3rem;
+  width: 100%;
+  .patients__top {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+    gap: 1rem;
+    h1 {
+      color: #50083b;
+      font-family: "Montserrat", sans-serif;
+      font-weight: bolder;
+      font-size: 3rem;
+    }
+    .top__buttons {
+      display: flex;
+      justify-content: space-between;
+      .input {
+        display: flex;
+        align-items: center;
+        width: 25%;
+        color: #50083b;
+        border-bottom: 1px solid #50083b;
+        svg {
+          position: absolute;
+          fill: #50083b;
+        }
+        input {
+          width: 100%;
+          font-family: "Poppins", sans-serif;
+          padding: 0.5rem 1rem 0.5rem 0;
+          padding-left: 1.5rem;
+          border: none;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      button {
+        gap: 1rem;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1.5rem;
+        background-color: #50083b;
+        color: white;
+        border-radius: 0.5rem;
+        font-size: 1.5rem;
+        transition: background 100ms;
+        &:hover {
+          cursor: pointer;
+          background-color: #cc0e74;
+        }
+      }
+    }
+  }
+  .patients__list {
+    margin-top: 3rem;
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem 0;
+  }
+}
